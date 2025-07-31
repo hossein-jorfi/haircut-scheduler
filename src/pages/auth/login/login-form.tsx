@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ScissorsIcon } from "lucide-react";
 
 export function LoginForm({
   className,
@@ -87,8 +86,8 @@ export function LoginForm({
               </div>
             </div>
           </form>
-          <div className="bg-muted relative hidden md:flex md:items-center md:justify-center w-[350px]">
-            <ScissorsIcon className="size-1/2" />
+          <div className="relative hidden md:flex md:items-center md:justify-center w-[350px] p-3">
+            <div className="bg-primary/5 pattern-1 h-full w-full rounded-lg border"></div>
           </div>
         </CardContent>
       </Card>

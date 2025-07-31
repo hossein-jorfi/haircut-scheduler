@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Link } from "react-router";
 
 export function LoginForm({
   className,
@@ -80,8 +81,8 @@ export function LoginForm({
               </div>
               <div className="text-center text-sm">
                 حساب کاربری ندارید؟{" "}
-                <Button variant="link" className="p-0 m-0 h-fit">
-                  ثبت نام
+                <Button variant="link" className="p-0 m-0 h-fit" asChild>
+                  <Link to="../register">ثبت نام</Link>
                 </Button>
               </div>
             </div>

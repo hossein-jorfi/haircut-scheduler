@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router";
+import Shape from "../shared/shape";
 
 export function LoginForm({
   className,
@@ -87,9 +88,7 @@ export function LoginForm({
               </div>
             </div>
           </form>
-          <div className="relative hidden md:flex md:items-center md:justify-center w-[350px] p-3">
-            <div className="bg-primary/5 pattern-1 h-full w-full rounded-lg border"></div>
-          </div>
+          <Shape />
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">

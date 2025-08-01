@@ -49,7 +49,7 @@ export function RegisterForm() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: z.infer<typeof FormSchema>) => {
-      return api.post("auth/token/", data);
+      return api.post("accounts/register/", data);
     },
   });
 
@@ -85,7 +85,7 @@ export function RegisterForm() {
               <RhfInput form={form} name="email" label="ایمیل" />
               <RhfInput form={form} name="password" label="رمز عبور" />
               <RhfInput form={form} name="password2" label="تایید رمز عبور" />
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" disabled={isPending}>
                 ثبت نام
               </Button>
               <OrLine />

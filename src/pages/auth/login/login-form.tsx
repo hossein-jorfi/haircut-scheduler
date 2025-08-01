@@ -1,23 +1,49 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Link } from "react-router";
 import Shape from "../shared/shape";
 import AuthProviders from "../shared/auth-providers";
 import OrLine from "../shared/or-line";
 import TermsAndConditionsLinks from "../shared/terms-and-conditions-links";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import FormProvider from "@/components/form/form-provider";
+import RhfInput from "@/components/form/rhf-input";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function LoginForm() {
+  const FormSchema = z.object({
+    email: z
+      .string()
+      .min(1, {
+        message: "لطفا ایمیل خود را وارد کنید",
+      })
+      .email({
+        message: "لطفا ایمیل خود را به صورت صحیح وارد کنید",
+      }),
+    password: z.string().min(1, {
+      message: "لطفا رمز عبور خود را وارد کنید",
+    }),
+  });
+
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data);
+  }
+
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("flex flex-col gap-6")}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <FormProvider form={form} onSubmit={onSubmit} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">ورود</h1>
@@ -25,27 +51,17 @@ export function LoginForm({
                   ورود به حساب کاربری
                 </p>
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="email">ایمیل</Label>
-                <Input
-                  dir="ltr"
-                  lang="en"
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">رمز عبور</Label>
-
+              <RhfInput form={form} name="email" label="ایمیل" />
+              <RhfInput
+                form={form}
+                name="password"
+                label="رمز عبور"
+                labelItem={
                   <Button variant="link" className="p-0 m-0 h-fit">
                     رمز عبور خود را فراموش کرده اید؟
                   </Button>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
+                }
+              />
               <Button type="submit" className="w-full">
                 ورود
               </Button>
@@ -58,7 +74,7 @@ export function LoginForm({
                 </Button>
               </div>
             </div>
-          </form>
+          </FormProvider>
           <Shape />
         </CardContent>
       </Card>

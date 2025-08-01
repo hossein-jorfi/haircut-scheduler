@@ -12,7 +12,7 @@ import type { UseFormReturn } from "react-hook-form";
 import type { ReactNode } from "react";
 
 interface Props {
-  form: UseFormReturn;
+  form: UseFormReturn<any>;
   label?: string;
   labelItem?: ReactNode;
   name: string;

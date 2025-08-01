@@ -15,6 +15,7 @@ import FormHeading from "../shared/form-heading";
 import api from "@/services/api";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "@/store/auth/hooks";
+import { toast } from "sonner";
 
 const FormSchema = z.object({
   username: z.string().min(1, {
@@ -49,9 +50,10 @@ export function LoginForm() {
         const data = res?.data;
         loginUser(data);
       },
-      onError: () => {
-        // toast.error(tShared("error"));
-        console.log("error");
+      onError: (err) => {
+        toast.error(
+          (err as any)?.response?.data?.detail || "مشکلی پیش آمده است!"
+        );
       },
     });
   }

@@ -8,20 +8,19 @@ import Shape from "../shared/shape";
 import OrLine from "../shared/or-line";
 import AuthProviders from "../shared/auth-providers";
 import TermsAndConditionsLinks from "../shared/terms-and-conditions-links";
+import FormHeading from "../shared/form-heading";
 
-export function RegisterForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function RegisterForm() {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("flex flex-col gap-6")}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">ثبت نام</h1>
-              </div>
+              <FormHeading
+                title="ثبت نام"
+                description="ساخت حساب کاربری جدید"
+              />
               <div className="grid gap-3">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">ایمیل</Label>

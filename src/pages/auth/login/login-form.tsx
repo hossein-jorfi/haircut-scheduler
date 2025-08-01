@@ -14,16 +14,17 @@ import RhfInput from "@/components/form/rhf-input";
 import FormHeading from "../shared/form-heading";
 import api from "@/services/api";
 import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "@/store/auth/hooks";
 
+const FormSchema = z.object({
+  username: z.string().min(1, {
+    message: "لطفا نام کاربری خود را وارد کنید",
+  }),
+  password: z.string().min(1, {
+    message: "لطفا رمز عبور خود را وارد کنید",
+  }),
+});
 export function LoginForm() {
-  const FormSchema = z.object({
-    username: z.string().min(1, {
-      message: "لطفا نام کاربری خود را وارد کنید",
-    }),
-    password: z.string().min(1, {
-      message: "لطفا رمز عبور خود را وارد کنید",
-    }),
-  });
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -32,14 +33,27 @@ export function LoginForm() {
     },
   });
 
-  // const loginMutation = useMutation({
-  //   mutationFn: (data: z.infer<typeof FormSchema>) => {
-  //     return api.post("/auth/login", data);
-  //   },
-  // });
+  const { loginUser } = useAuth();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: z.infer<typeof FormSchema>) => {
+      return api.post("auth/token/", data);
+    },
+  });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    if (isPending) return;
+
+    mutate(data, {
+      onSuccess: (res) => {
+        const data = res?.data;
+        loginUser(data);
+      },
+      onError: () => {
+        // toast.error(tShared("error"));
+        console.log("error");
+      },
+    });
   }
 
   return (

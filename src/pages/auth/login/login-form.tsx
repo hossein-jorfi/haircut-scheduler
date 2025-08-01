@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormProvider from "@/components/form/form-provider";
 import RhfInput from "@/components/form/rhf-input";
+import FormHeading from "../shared/form-heading";
 
 export function LoginForm() {
   const FormSchema = z.object({
@@ -45,12 +46,7 @@ export function LoginForm() {
         <CardContent className="grid p-0 md:grid-cols-2">
           <FormProvider form={form} onSubmit={onSubmit} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
-              <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">ورود</h1>
-                <p className="text-muted-foreground text-balance">
-                  ورود به حساب کاربری
-                </p>
-              </div>
+              <FormHeading title="ورود" description="ورود به حساب کاربری" />
               <RhfInput form={form} name="email" label="ایمیل" />
               <RhfInput
                 form={form}

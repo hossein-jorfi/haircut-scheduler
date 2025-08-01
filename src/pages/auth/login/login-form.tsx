@@ -12,29 +12,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormProvider from "@/components/form/form-provider";
 import RhfInput from "@/components/form/rhf-input";
 import FormHeading from "../shared/form-heading";
+import api from "@/services/api";
+import { useMutation } from "@tanstack/react-query";
 
 export function LoginForm() {
   const FormSchema = z.object({
-    email: z
-      .string()
-      .min(1, {
-        message: "لطفا ایمیل خود را وارد کنید",
-      })
-      .email({
-        message: "لطفا ایمیل خود را به صورت صحیح وارد کنید",
-      }),
+    username: z.string().min(1, {
+      message: "لطفا نام کاربری خود را وارد کنید",
+    }),
     password: z.string().min(1, {
       message: "لطفا رمز عبور خود را وارد کنید",
     }),
   });
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
+
+  // const loginMutation = useMutation({
+  //   mutationFn: (data: z.infer<typeof FormSchema>) => {
+  //     return api.post("/auth/login", data);
+  //   },
+  // });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
@@ -47,7 +49,7 @@ export function LoginForm() {
           <FormProvider form={form} onSubmit={onSubmit} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <FormHeading title="ورود" description="ورود به حساب کاربری" />
-              <RhfInput form={form} name="email" label="ایمیل" />
+              <RhfInput form={form} name="username" label="نام کاربری" />
               <RhfInput
                 form={form}
                 name="password"

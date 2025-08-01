@@ -64,6 +64,7 @@ export function RegisterForm() {
       },
       onError: (err) => {
         toast.error(
+          /* eslint-disable  @typescript-eslint/no-explicit-any */
           (err as any)?.response?.data?.detail || "مشکلی پیش آمده است!"
         );
       },

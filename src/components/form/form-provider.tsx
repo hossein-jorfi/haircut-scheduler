@@ -3,8 +3,8 @@ import type { UseFormReturn } from "react-hook-form";
 
 interface Props {
   children: React.ReactNode;
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+  form: UseFormReturn;
+  onSubmit: (data: unknown) => void;
   className?: string;
 }
 

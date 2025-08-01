@@ -74,7 +74,7 @@ export function LoginForm() {
                   </Button>
                 }
               />
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" disabled={isPending}>
                 ورود
               </Button>
               <OrLine />

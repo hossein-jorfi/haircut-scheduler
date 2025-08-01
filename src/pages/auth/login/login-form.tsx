@@ -47,8 +47,11 @@ export function LoginForm() {
 
     mutate(data, {
       onSuccess: (res) => {
-        const data = res?.data;
-        loginUser(data);
+        const responseData: { access: string } = res?.data;
+        loginUser({
+          token: responseData?.access || "",
+          username: data?.username,
+        });
       },
       onError: (err) => {
         toast.error(

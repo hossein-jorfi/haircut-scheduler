@@ -74,6 +74,9 @@ export function LoginForm() {
                 form={form}
                 name="password"
                 label="رمز عبور"
+                inputProps={{
+                  type: "password",
+                }}
                 labelItem={
                   <Button variant="link" className="p-0 m-0 h-fit">
                     رمز عبور خود را فراموش کرده اید؟

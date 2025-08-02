@@ -1,5 +1,13 @@
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+
 const NewAppointmentButton = () => {
-  return <div>NewAppointmentButton</div>;
+  return (
+    <Button>
+      <Plus />
+      رزرو نوبت
+    </Button>
+  );
 };
 
 export default NewAppointmentButton;

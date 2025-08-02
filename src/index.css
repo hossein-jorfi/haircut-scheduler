@@ -126,6 +126,12 @@
   }
 }
 
+@layer components {
+  .app-container {
+    @apply xl:container md:px-8 px-4;
+  }
+}
+
 @utility container {
   margin-inline: auto;
 }

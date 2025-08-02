@@ -22,7 +22,7 @@ const Main = () => {
   };
 
   return (
-    <div className="app-container" dir="ltr">
+    <div className="app-container overflow-x-hidden" dir="ltr">
       <EventCalendar
         events={events}
         onEventAdd={handleEventAdd}

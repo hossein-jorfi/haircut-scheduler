@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { EventCalendar, type CalendarEvent } from "@/components/event-calendar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Main = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -22,7 +23,7 @@ const Main = () => {
   };
 
   return (
-    <div className="app-container overflow-x-hidden" dir="ltr">
+    <ScrollArea className="app-container overflow-x-hidden">
       <EventCalendar
         events={events}
         onEventAdd={handleEventAdd}
@@ -30,7 +31,7 @@ const Main = () => {
         onEventDelete={handleEventDelete}
         initialView="month"
       />
-    </div>
+    </ScrollArea>
   );
 };
 

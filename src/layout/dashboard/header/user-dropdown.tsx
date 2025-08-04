@@ -21,7 +21,7 @@ const UserDropdown = () => {
           <User />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
+      <DropdownMenuContent align="end">
         <div className="p-2 border-b mb-1">{userInfo?.username}</div>
         <DropdownMenuItem onClick={logoutUser}>
           <LogOut /> خروج

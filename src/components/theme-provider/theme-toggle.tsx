@@ -44,8 +44,12 @@ export function ThemeToggle() {
           <DropdownMenuItem
             key={item.value}
             onClick={() => setTheme(item.value)}
+            className="flex items-center gap-2 justify-between"
           >
-            {item.icon} {item.text}
+            <div className="flex items-center gap-2">
+              {item.icon} {item.text}
+            </div>
+            {item.value === theme && <Check />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

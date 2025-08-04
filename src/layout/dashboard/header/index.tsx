@@ -1,18 +1,18 @@
-import NewAppointmentButton from "./new-appointment-button";
 import { ThemeToggle } from "@/components/theme-provider/theme-toggle";
 import UserDropdown from "./user-dropdown";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const Header = () => {
   return (
-    <div className="mb-5 py-5">
-      <div className="app-container flex justify-between items-center">
-        <div className="flex items-center gap-2">
+    <>
+      <div className="z-50 px-4 py-3 flex gap-2 items-center border justify-between sticky backdrop-blur-lg bg-sidebar/40 mx-2 md:ms-0 rounded-lg top-2 mb-2">
+        <SidebarTrigger />
+        <div className="flex gap-2 items-center">
           <UserDropdown />
           <ThemeToggle />
         </div>
-        <NewAppointmentButton />
       </div>
-    </div>
+    </>
   );
 };
 

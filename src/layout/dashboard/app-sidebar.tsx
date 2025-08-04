@@ -10,19 +10,19 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router";
-import { Calendar, User } from "lucide-react";
+import { CalendarDays, ClipboardClock, User } from "lucide-react";
 
 export function AppSidebar() {
   const items = [
     {
       title: "تقویم",
       url: "/",
-      icon: Calendar,
+      icon: CalendarDays,
     },
     {
       title: "نوبت ها",
       url: "#",
-      icon: Calendar,
+      icon: ClipboardClock,
     },
     {
       title: "حساب کاربری",

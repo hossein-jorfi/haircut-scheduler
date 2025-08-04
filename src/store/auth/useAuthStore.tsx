@@ -17,7 +17,7 @@ const useAuthStore = create<CartState>()(
   persist(
     (set) => ({
       // initial state
-      isLoggedIn: false,
+      isLoggedIn: true,
       userInfo: undefined,
       // actions
       logIn: (userInfo) => set(() => ({ isLoggedIn: true, userInfo })),

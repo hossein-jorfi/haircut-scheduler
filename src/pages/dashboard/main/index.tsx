@@ -23,7 +23,7 @@ const Main = () => {
   };
 
   return (
-    <ScrollArea className="app-container overflow-x-hidden">
+    <ScrollArea className="app-container overflow-x-hidden" dir="ltr">
       <EventCalendar
         events={events}
         onEventAdd={handleEventAdd}

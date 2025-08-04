@@ -83,8 +83,18 @@ export function RegisterForm() {
               />
               <RhfInput form={form} name="username" label="نام کاربری" />
               <RhfInput form={form} name="email" label="ایمیل" />
-              <RhfInput form={form} name="password" label="رمز عبور" />
-              <RhfInput form={form} name="password2" label="تایید رمز عبور" />
+              <RhfInput
+                form={form}
+                name="password"
+                label="رمز عبور"
+                inputProps={{ type: "password" }}
+              />
+              <RhfInput
+                form={form}
+                name="password2"
+                label="تایید رمز عبور"
+                inputProps={{ type: "password" }}
+              />
               <Button type="submit" className="w-full" disabled={isPending}>
                 ثبت نام
               </Button>

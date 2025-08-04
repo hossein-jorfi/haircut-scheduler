@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Monitor, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +10,25 @@ import {
 import { useTheme } from "@/components/theme-provider";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+
+  const items = [
+    {
+      value: "light" as const,
+      text: "روشن",
+      icon: <Sun />,
+    },
+    {
+      value: "dark" as const,
+      text: "تاریک",
+      icon: <Moon />,
+    },
+    {
+      value: "system" as const,
+      text: "سیستم",
+      icon: <Monitor />,
+    },
+  ];
 
   return (
     <DropdownMenu>
@@ -22,15 +40,18 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          روشن
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          تاریک
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          سیستم
-        </DropdownMenuItem>
+        {items.map((item) => (
+          <DropdownMenuItem
+            key={item.value}
+            onClick={() => setTheme(item.value)}
+            className="flex items-center gap-2 justify-between"
+          >
+            <div className="flex items-center gap-2">
+              {item.icon} {item.text}
+            </div>
+            {item.value === theme && <Check />}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

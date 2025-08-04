@@ -2,9 +2,12 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
+  SidebarGroup,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
+  SidebarGroupLabel,
+  SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router";
 import { Calendar, User } from "lucide-react";
@@ -18,24 +21,29 @@ export function AppSidebar() {
     },
     {
       title: "نوبت ها",
-      url: "/appointments",
+      url: "#",
       icon: Calendar,
     },
     {
       title: "حساب کاربری",
-      url: "/account",
+      url: "#",
       icon: User,
     },
   ];
 
   return (
-    <Sidebar collapsible="icon" variant="floating">
+    <Sidebar collapsible="icon" variant="floating" side="right">
       <SidebarHeader>نوبت دهی</SidebarHeader>
-      <SidebarContent>
-        {items.map((item) => (
-          <SidebarItem key={item.title} item={item} />
-        ))}
-      </SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>منو</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarContent>
+            {items.map((item) => (
+              <SidebarItem key={item.title} item={item} />
+            ))}
+          </SidebarContent>
+        </SidebarMenu>
+      </SidebarGroup>
     </Sidebar>
   );
 }
@@ -56,7 +64,7 @@ const SidebarItem = ({
         tooltip={item.title}
         onClick={() => isMobile && toggleSidebar()}
       >
-        <Link to={item.url} className="cursor-default">
+        <Link to={item.url} className="cursor-default flex items-center gap-2">
           <item.icon />
           <span>{item.title}</span>
         </Link>

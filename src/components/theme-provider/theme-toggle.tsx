@@ -10,7 +10,25 @@ import {
 import { useTheme } from "@/components/theme-provider";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+
+  const items = [
+    {
+      value: "light" as const,
+      text: "روشن",
+      icon: <Sun />,
+    },
+    {
+      value: "dark" as const,
+      text: "تاریک",
+      icon: <Moon />,
+    },
+    {
+      value: "system" as const,
+      text: "سیستم",
+      icon: <Monitor />,
+    },
+  ];
 
   return (
     <DropdownMenu>
@@ -22,15 +40,14 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun /> روشن
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon /> تاریک
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Monitor /> سیستم
-        </DropdownMenuItem>
+        {items.map((item) => (
+          <DropdownMenuItem
+            key={item.value}
+            onClick={() => setTheme(item.value)}
+          >
+            {item.icon} {item.text}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

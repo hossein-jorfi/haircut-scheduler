@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Plus } from "lucide-react";
 
 const AppointmentsModal = () => {
   return (
@@ -17,10 +18,12 @@ const AppointmentsModal = () => {
       </DialogHeader>
       <div className="flex flex-col gap-4">فرم</div>
       <DialogFooter>
-        <Button>رزرو نوبت</Button>
         <DialogClose asChild>
           <Button variant="outline">انصراف</Button>
         </DialogClose>
+        <Button>
+          <Plus /> رزرو نوبت
+        </Button>
       </DialogFooter>
     </DialogContent>
   );

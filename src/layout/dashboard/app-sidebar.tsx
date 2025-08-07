@@ -21,7 +21,7 @@ export function AppSidebar() {
     },
     {
       title: "نوبت ها",
-      url: "#",
+      url: "/appointments",
       icon: ClipboardClock,
     },
     {

@@ -8,6 +8,7 @@ import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import DashboardLayout from "./layout/dashboard/dashboard-layout";
 import Main from "./pages/dashboard/main";
+import Appointments from "./pages/dashboard/appointments";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+      },
+      {
+        path: "appointments",
+        element: <Appointments />,
       },
     ],
   },

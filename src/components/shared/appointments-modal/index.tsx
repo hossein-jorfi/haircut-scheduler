@@ -45,7 +45,6 @@ const AppointmentsModal = () => {
     queryKey: ["barbers"],
     queryFn: () => api.get("accounts/barbers/"),
   });
-  console.log(barberQuery.data?.data);
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log(data);
@@ -73,7 +72,10 @@ const AppointmentsModal = () => {
             }
             selectProps={{
               className: "w-full",
-              placeholder: "انتخاب آرایشگر",
+              placeholder: barberQuery.isLoading
+                ? "در حال بارگذاری..."
+                : "انتخاب آرایشگر",
+              disabled: barberQuery.isLoading || barberQuery.isError,
             }}
           />
           <RhfDatePicker
@@ -84,7 +86,7 @@ const AppointmentsModal = () => {
             placeholder="انتخاب تاریخ"
           />
         </div>
-        <DialogFooter className="mt-4">
+        <DialogFooter className="mt-8">
           <DialogClose asChild>
             <Button variant="outline">انصراف</Button>
           </DialogClose>

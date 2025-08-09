@@ -14,6 +14,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RhfSelect from "@/components/form/rhf-select";
 import { RhfDatePicker } from "@/components/form/rhf-date-picker";
+import api from "@/services/api";
+import { useQuery } from "@tanstack/react-query";
+import type { AxiosResponse } from "axios";
+
+interface Barber {
+  id: number;
+  username: string;
+  email: string;
+  phone: string;
+  avatar: string;
+}
 
 const FormSchema = z.object({
   barber: z.string().min(1, {
@@ -29,6 +40,12 @@ const AppointmentsModal = () => {
       date: undefined,
     },
   });
+
+  const barberQuery = useQuery<AxiosResponse<Barber[]>>({
+    queryKey: ["barbers"],
+    queryFn: () => api.get("accounts/barbers/"),
+  });
+  console.log(barberQuery.data?.data);
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log(data);
@@ -48,7 +65,12 @@ const AppointmentsModal = () => {
             label="آرایشگر"
             name="barber"
             form={form}
-            items={[]}
+            items={
+              barberQuery.data?.data.map((barber) => ({
+                text: barber.username,
+                value: barber.id.toString(),
+              })) || []
+            }
             selectProps={{
               className: "w-full",
               placeholder: "انتخاب آرایشگر",

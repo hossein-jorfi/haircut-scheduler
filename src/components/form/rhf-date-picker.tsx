@@ -38,7 +38,7 @@ export function RhfDatePicker({
       render={({ field, formState: { errors } }) => {
         return (
           <Popover>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               {label && <FormLabel>{label}</FormLabel>}
               <PopoverTrigger asChild>
                 <Button

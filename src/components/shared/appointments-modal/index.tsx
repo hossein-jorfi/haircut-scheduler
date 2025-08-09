@@ -17,6 +17,7 @@ import { RhfDatePicker } from "@/components/form/rhf-date-picker";
 import api from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
+import RhfInput from "@/components/form/rhf-input";
 
 interface Barber {
   id: number;
@@ -31,6 +32,7 @@ const FormSchema = z.object({
     message: "لطفا آرایشگر خود را انتخاب کنید",
   }),
   date: z.date().optional(),
+  time: z.string().optional(),
 });
 const AppointmentsModal = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -38,6 +40,7 @@ const AppointmentsModal = () => {
     defaultValues: {
       barber: "",
       date: undefined,
+      time: undefined,
     },
   });
 
@@ -47,7 +50,13 @@ const AppointmentsModal = () => {
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
+    console.log("Form data:", data);
+
+    if (data.date && data.time) {
+      const [hours, minutes] = data.time.split(":").map(Number);
+      const combinedDateTime = new Date(data.date);
+      combinedDateTime.setHours(hours, minutes, 0, 0);
+    }
   };
 
   return (
@@ -84,6 +93,17 @@ const AppointmentsModal = () => {
             form={form}
             className="w-full"
             placeholder="انتخاب تاریخ"
+          />
+          <RhfInput
+            label="ساعت"
+            name="time"
+            form={form}
+            inputProps={{
+              placeholder: "انتخاب ساعت",
+              type: "time",
+              className:
+                "bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none",
+            }}
           />
         </div>
         <DialogFooter className="mt-8">

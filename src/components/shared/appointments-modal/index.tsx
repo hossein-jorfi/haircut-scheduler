@@ -15,9 +15,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import RhfSelect from "@/components/form/rhf-select";
 import { RhfDatePicker } from "@/components/form/rhf-date-picker";
 import api from "@/services/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import RhfInput from "@/components/form/rhf-input";
+import { toast } from "sonner";
 
 interface Barber {
   id: number;
@@ -49,6 +50,11 @@ const AppointmentsModal = () => {
     queryFn: () => api.get("accounts/barbers/"),
   });
 
+  const reserveQuery = useMutation({
+    mutationFn: (data: { barber: string; appointment_time: string }) =>
+      api.post("appointments/", { ...data, status: "scheduled" }),
+  });
+
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log("Form data:", data);
 
@@ -56,6 +62,24 @@ const AppointmentsModal = () => {
       const [hours, minutes] = data.time.split(":").map(Number);
       const combinedDateTime = new Date(data.date);
       combinedDateTime.setHours(hours, minutes, 0, 0);
+
+      reserveQuery.mutate(
+        {
+          barber: data.barber,
+          appointment_time: combinedDateTime.toISOString(),
+        },
+        {
+          onSuccess: () => {
+            toast.success("نوبت با موفقیت رزرو شد");
+            form.reset();
+            document.getElementById("close-modal")?.click();
+          },
+          onError: () => {
+            document.getElementById("close-modal")?.click();
+            toast.error("خطا در رزرو نوبت");
+          },
+        }
+      );
     }
   };
 
@@ -107,10 +131,12 @@ const AppointmentsModal = () => {
           />
         </div>
         <DialogFooter className="mt-8">
-          <DialogClose asChild>
-            <Button variant="outline">انصراف</Button>
+          <DialogClose asChild id="close-modal">
+            <Button variant="outline" type="button">
+              انصراف
+            </Button>
           </DialogClose>
-          <Button>
+          <Button type="submit" disabled={reserveQuery.isPending}>
             <Plus /> رزرو نوبت
           </Button>
         </DialogFooter>

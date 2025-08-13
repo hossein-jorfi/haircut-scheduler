@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 export interface UserInfo {
   username: string;
   token: string;
+  user_id: number;
 }
 
 interface CartState {

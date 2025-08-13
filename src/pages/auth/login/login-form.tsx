@@ -47,10 +47,11 @@ export function LoginForm() {
 
     mutate(data, {
       onSuccess: (res) => {
-        const responseData: { access: string } = res?.data;
+        const responseData: { access: string; user_id: number } = res?.data;
         loginUser({
           token: responseData?.access || "",
           username: data?.username,
+          user_id: responseData?.user_id,
         });
       },
       onError: (err) => {

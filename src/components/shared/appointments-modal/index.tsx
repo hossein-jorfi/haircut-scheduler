@@ -19,6 +19,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import RhfInput from "@/components/form/rhf-input";
 import { toast } from "sonner";
+import useAuthStore from "@/store/auth/useAuthStore";
 
 interface Barber {
   id: number;
@@ -51,13 +52,16 @@ const AppointmentsModal = () => {
   });
 
   const reserveQuery = useMutation({
-    mutationFn: (data: { barber: string; appointment_time: string }) =>
-      api.post("appointments/", { ...data, status: "scheduled" }),
+    mutationFn: (data: {
+      barber: string;
+      appointment_time: string;
+      customer: number;
+    }) => api.post("appointments/", { ...data, status: "scheduled" }),
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log("Form data:", data);
+  const userId = useAuthStore((state) => state.userInfo?.user_id);
 
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
     if (data.date && data.time) {
       const [hours, minutes] = data.time.split(":").map(Number);
       const combinedDateTime = new Date(data.date);
@@ -65,6 +69,7 @@ const AppointmentsModal = () => {
 
       reserveQuery.mutate(
         {
+          customer: userId || 0,
           barber: data.barber,
           appointment_time: combinedDateTime.toISOString(),
         },

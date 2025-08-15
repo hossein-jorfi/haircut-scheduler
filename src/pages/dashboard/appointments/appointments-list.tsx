@@ -52,7 +52,7 @@ const AppointmentsList = ({
               <NotebookPen />
               تغییر تاریخ
             </Button>
-            <DeleteModal />
+            <DeleteModal appointmentId={appointment.id} />
           </CardFooter>
         </Card>
       ))}

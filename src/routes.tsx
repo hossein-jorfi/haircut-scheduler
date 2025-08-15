@@ -9,13 +9,17 @@ import Register from "./pages/auth/register";
 import DashboardLayout from "./layout/dashboard/dashboard-layout";
 import Main from "./pages/dashboard/main";
 import Appointments from "./pages/dashboard/appointments";
+import { Suspense } from "react";
+import PageLoading from "./components/shared/loading/page-loading";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <DashboardLayout>
-        <Outlet />
+        <Suspense fallback={<PageLoading />}>
+          <Outlet />
+        </Suspense>
       </DashboardLayout>
     ),
     children: [

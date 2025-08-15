@@ -1,6 +1,5 @@
 import {
   Calendar,
-  CalendarX2,
   Check,
   Clock,
   NotebookPen,
@@ -19,6 +18,7 @@ import { Small } from "@/components/ui/typography";
 import { useNumberFormat } from "@/hooks/use-number-format";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import DeleteModal from "./delete-modal";
 
 const AppointmentsList = ({
   appointments,
@@ -52,10 +52,7 @@ const AppointmentsList = ({
               <NotebookPen />
               تغییر تاریخ
             </Button>
-            <Button variant="secondary">
-              <CalendarX2 />
-              لغو نوبت
-            </Button>
+            <DeleteModal />
           </CardFooter>
         </Card>
       ))}

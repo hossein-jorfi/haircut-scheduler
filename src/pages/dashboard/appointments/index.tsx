@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Dialog } from "@/components/ui/dialog";
 import AppointmentsModal from "@/components/shared/appointments-modal";
 import { useState } from "react";
+import AppointmentsList from "./appointments-list";
 
 const Appointments = () => {
   const [open, setOpen] = useState(false);
@@ -19,6 +20,7 @@ const Appointments = () => {
       >
         نوبت ها
       </PageHeading>
+      <AppointmentsList />
       <EmptyList text="هنوز نوبتی رزرو نشده است">
         <Button onClick={() => setOpen(true)}>
           <Plus />

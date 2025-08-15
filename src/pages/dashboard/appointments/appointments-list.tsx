@@ -1,4 +1,4 @@
-import { Calendar, Pencil, Trash, UserRound } from "lucide-react";
+import { Calendar, CalendarX2, Pencil, UserRound } from "lucide-react";
 import { type AppointmentType } from ".";
 import {
   Card,
@@ -38,7 +38,7 @@ const AppointmentsList = ({
               تغییر تاریخ
             </Button>
             <Button variant="secondary">
-              <Trash />
+              <CalendarX2 />
               لغو نوبت
             </Button>
           </CardFooter>

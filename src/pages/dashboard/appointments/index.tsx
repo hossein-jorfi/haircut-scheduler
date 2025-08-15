@@ -8,8 +8,7 @@ import { useState } from "react";
 import AppointmentsList from "./appointments-list";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import api from "@/services/api";
-
-interface AppointmentType {
+export interface AppointmentType {
   id: number;
   customer: number;
   customer_name: string;
@@ -36,13 +35,16 @@ const Appointments = () => {
       >
         نوبت ها
       </PageHeading>
-      <AppointmentsList />
-      <EmptyList text="هنوز نوبتی رزرو نشده است">
-        <Button onClick={() => setOpen(true)}>
-          <Plus />
-          رزرو نوبت
-        </Button>
-      </EmptyList>
+      {appointments?.data?.length > 0 ? (
+        <AppointmentsList appointments={appointments.data} />
+      ) : (
+        <EmptyList text="هنوز نوبتی رزرو نشده است">
+          <Button onClick={() => setOpen(true)}>
+            <Plus />
+            رزرو نوبت
+          </Button>
+        </EmptyList>
+      )}
       <Dialog open={open} onOpenChange={setOpen}>
         <AppointmentsModal />
       </Dialog>

@@ -29,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: "appointments",
-        element: <Appointments />,
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Appointments />
+          </Suspense>
+        ),
       },
     ],
   },
